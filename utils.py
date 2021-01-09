@@ -31,7 +31,6 @@ class NetworkHelper(object):
             result = NetworkHelper.insert_api_key(result)
         else:
             result = NetworkHelper.insert_find_api_key(result)
-        print(result)
         response = requests.get(result)
         data = response.json()
         return data

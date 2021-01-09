@@ -9,7 +9,6 @@ class WeatherService(NetworkHelper):
     def getWeatherCity(self, city: str) -> (str, Temperature):
         params = {"q": city, "units": "metric", "lang": "it", "isFindCall": False}
         data = self.get(params)
-        print(data)
         weather = data["weather"][0]
         return weather["description"], Temperature.fromJson(data["main"]),
 
