@@ -17,8 +17,3 @@ class WeatherService(NetworkHelper):
         return f"A {city} il tempo è: {weatherCondition}. La temperatura attuale è di {temperature.actual} gradi, " \
                f"percepita di {temperature.feels} gradi. La minima e la massima di oggi saranno rispettivamente di " \
                f"{temperature.min} gradi e di {temperature.max} gradi."
-
-
-if __name__ == '__main__':
-    weather = WeatherService()
-    print(weather.getWeatherCity("Bussero"))
