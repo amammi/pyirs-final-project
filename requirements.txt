@@ -1,7 +1,3 @@
-gTTS
+pyttsx3
 SpeechRecognition
-PyObjC
-audioplayer
-PyAudio
-pyowm
 requests

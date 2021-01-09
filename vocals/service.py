@@ -1,20 +1,21 @@
-from gtts import gTTS
-import audioplayer
+import pyttsx3
 import speech_recognition as sr
 
 
 class VocalService(object):
     def __init__(self):
+        self.engine = pyttsx3.init()
+        self.engine.setProperty("volume", 1.0)
+        self.engine.setProperty('rate', 170)
+
         self.microphone = sr.Microphone()
         self.recognizer = sr.Recognizer()
         self.lang = "it"
         self.filename = "prova.wav"
 
     def saySomething(self, phrase: str):
-        vocal = gTTS(phrase, lang=self.lang)
-        vocal.save(self.filename)
-        player = audioplayer.AudioPlayer(self.filename)
-        player.play(block=True)
+        self.engine.say(phrase)
+        self.engine.runAndWait()
 
     def listenSomething(self, duration: int = 5) -> str:
         with self.microphone as source:
