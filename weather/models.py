@@ -1,5 +1,5 @@
 class Temperature(object):
-    def __init__(self, actual: int, feels: int, min: int, max: int):
+    def __init__(self, actual: float, feels: float, min: float, max: float):
         self.actual = actual
         self.feels = feels
         self.min = min
