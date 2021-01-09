@@ -10,8 +10,7 @@ class VocalService(object):
 
         self.microphone = sr.Microphone()
         self.recognizer = sr.Recognizer()
-        self.lang = "it"
-        self.filename = "prova.wav"
+        self.lang = "it_IT"
 
     def saySomething(self, phrase: str):
         self.engine.say(phrase)
@@ -23,7 +22,7 @@ class VocalService(object):
             print("Inizio registrazione...")
             record = self.recognizer.record(source, duration=duration)
             print("Fine registrazione")
-            return self.recognizer.recognize_google(record, language=f"{self.lang}_IT")
+            return self.recognizer.recognize_google(record, language=f"{self.lang}")
 
     def isWeatherRequest(self, request: str):
         return "tempo" in request
