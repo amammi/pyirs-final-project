@@ -6,13 +6,15 @@ class WeatherService(NetworkHelper):
     def __init__(self):
         super().__init__(Commons.OWM_BASE_URL.value)
 
-    def getWeatherCity(self, city: str) -> (str, Temperature):
+    def getWeatherCity(self, city: str) -> Temperature:
         params = {"q": city, "units": "metric", "lang": "it", "isFindCall": False}
         data = self.get(params)
         weather = data["weather"][0]
-        return weather["description"], Temperature.fromJson(data["main"]),
+        temp = Temperature(weather["description"], data["main"])
+        return temp
 
-    def getWeatherPhrase(self, city: str, weatherCondition: str, temperature: Temperature) -> str:
-        return f"A {city} il tempo è: {weatherCondition}. La temperatura attuale è di {temperature.actual} gradi, " \
+    @staticmethod
+    def getWeatherPhrase(city: str, temperature: Temperature) -> str:
+        return f"A {city} il tempo è: {temperature.description}. La temperatura attuale è di {temperature.actual} gradi, " \
                f"percepita di {temperature.feels} gradi. La minima e la massima di oggi saranno rispettivamente di " \
                f"{temperature.min} gradi e di {temperature.max} gradi."

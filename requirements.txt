@@ -2,4 +2,5 @@ pyttsx3
 gTTS
 audioplayer
 SpeechRecognition
+PyAudio
 requests

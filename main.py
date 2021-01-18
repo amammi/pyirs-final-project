@@ -39,8 +39,8 @@ def cleanVersion():
     if city is None:
         vocalService.saySomething("Per favore, specifica la città")
         return
-    description, temperature = weatherService.getWeatherCity(city)
-    weatherPhrase = weatherService.getWeatherPhrase(city, description, temperature)
+    temperature = weatherService.getWeatherCity(city)
+    weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
     vocalService.saySomething(weatherPhrase)
 
 
