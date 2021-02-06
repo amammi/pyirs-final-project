@@ -3,6 +3,7 @@ import time
 import audioplayer
 import speech_recognition
 
+from utils import Commons, VocalSentencies
 from vocals.service import VocalService
 from weather.service import WeatherService
 from wiki.service import WikipediaService
@@ -34,12 +35,12 @@ def dirtyVersion():
 
 
 def cleanVersion():
-    vocalService.saySomething("Ciao, cosa posso fare per te?")
+    vocalService.saySomething(VocalSentencies.VOCAL_GREETING.value)
     request = vocalService.listenSomething()
     if vocalService.isWeatherRequest(request):
         city = vocalService.findWeatherCityInRequest(request)
         if city is None:
-            vocalService.saySomething("Per favore, specifica la città")
+            vocalService.saySomething(VocalSentencies.VOCAL_CITY_NOT_FOUND.value)
             return
         temperature = weatherService.getWeatherCity(city)
         weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
@@ -51,11 +52,11 @@ def cleanVersion():
             if sentence is not None:
                 vocalService.saySomething(sentence)
             else:
-                vocalService.saySomething("Mi dispiace, ma non ho trovato niente relativo alla tua ricerca.")
+                vocalService.saySomething(VocalSentencies.VOCAL_ERROR_NOT_FOUND.value)
         else:
-            vocalService.saySomething("Mi dispiace, non ho capito.")
+            vocalService.saySomething(VocalSentencies.VOCAL_ERROR_MESSAGE.value)
     else:
-        vocalService.saySomething("Mi dispiace, non ho capito.")
+        vocalService.saySomething(VocalSentencies.VOCAL_ERROR_MESSAGE.value)
 
 
 weatherService = WeatherService()

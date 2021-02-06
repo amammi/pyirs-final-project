@@ -11,6 +11,13 @@ class Commons(Enum):
     OWM_FIND_KEY = os.getenv("OWM_FIND_KEY")
 
 
+class VocalSentencies(Enum):
+    VOCAL_ERROR_MESSAGE = "Mi dispiace, non ho capito."
+    VOCAL_ERROR_NOT_FOUND = "Mi dispiace, ma non ho trovato niente relativo alla tua ricerca."
+    VOCAL_CITY_NOT_FOUND = "Per favore, specifica la città"
+    VOCAL_GREETING = "Ciao, cosa posso fare per te?"
+
+
 class NetworkHelper(object):
     def __init__(self, baseUrl: str):
         self.baseUrl = baseUrl
