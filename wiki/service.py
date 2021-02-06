@@ -9,10 +9,8 @@ class WikipediaService(NetworkHelper):
 
     def getDetailsOfRequest(self, request: str, results: list = None) -> str:
         try:
-            print(request)
             if results is None:
                 results = wikipedia.search(request)
-                print(results)
                 result = wikipedia.summary(results[0], sentences=2)
             else:
                 result = wikipedia.summary(results[0], sentences=2)
