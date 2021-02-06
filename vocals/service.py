@@ -27,6 +27,17 @@ class VocalService(object):
     def isWeatherRequest(self, request: str):
         return "tempo" in request
 
+    def isWikipediaRequest(self, sentence: str):
+        return "wikipedia" in sentence or "Wikipedia" in sentence
+
+    def findWikiSentenceInRequest(self, request: str) -> str:
+        tokens = request.split(" ")
+        try:
+            index = tokens.index("wikipedia")
+            return " ".join(tokens[index + 1:])
+        except ValueError:
+            return None
+
     def findWeatherCityInRequest(self, request: str) -> str:
         if self.isWeatherRequest(request):
             tokens = request.split(" ")

@@ -5,6 +5,7 @@ import speech_recognition
 
 from vocals.service import VocalService
 from weather.service import WeatherService
+from wiki.service import WikipediaService
 
 
 def dirtyVersion():
@@ -35,16 +36,30 @@ def dirtyVersion():
 def cleanVersion():
     vocalService.saySomething("Ciao, cosa posso fare per te?")
     request = vocalService.listenSomething()
-    city = vocalService.findWeatherCityInRequest(request)
-    if city is None:
-        vocalService.saySomething("Per favore, specifica la città")
-        return
-    temperature = weatherService.getWeatherCity(city)
-    weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
-    vocalService.saySomething(weatherPhrase)
+    if vocalService.isWeatherRequest(request):
+        city = vocalService.findWeatherCityInRequest(request)
+        if city is None:
+            vocalService.saySomething("Per favore, specifica la città")
+            return
+        temperature = weatherService.getWeatherCity(city)
+        weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
+        vocalService.saySomething(weatherPhrase)
+    elif vocalService.isWikipediaRequest(request):
+        wikiRequest = vocalService.findWikiSentenceInRequest(request.lower())
+        if wikiRequest is not None:
+            sentence = wikiService.getDetailsOfRequest(wikiRequest)
+            if sentence is not None:
+                vocalService.saySomething(sentence)
+            else:
+                vocalService.saySomething("Mi dispiace, ma non ho trovato niente relativo alla tua ricerca.")
+        else:
+            vocalService.saySomething("Mi dispiace, non ho capito.")
+    else:
+        vocalService.saySomething("Mi dispiace, non ho capito.")
 
 
 weatherService = WeatherService()
+wikiService = WikipediaService()
 vocalService = VocalService()
 
 if __name__ == '__main__':

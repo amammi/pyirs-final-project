@@ -4,3 +4,4 @@ audioplayer
 SpeechRecognition
 PyAudio
 requests
+wikipedia
