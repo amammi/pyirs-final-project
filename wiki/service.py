@@ -1,11 +1,17 @@
-from utils import NetworkHelper
 import wikipedia
 
 
-class WikipediaService(NetworkHelper):
+class WikipediaService:
 
     def __init__(self):
         wikipedia.set_lang("it")
+
+    def getNaiveSummary(self, request: str):
+        try:
+            result = wikipedia.summary(request, sentences=2)
+            return result
+        except wikipedia.DisambiguationError:
+            return None
 
     def getDetailsOfRequest(self, request: str, results: list = None) -> str:
         try:
@@ -23,5 +29,4 @@ class WikipediaService(NetworkHelper):
                 return None
 
 
-if __name__ == '__main__':
-    print(wikipedia.search("new York")[0])
+

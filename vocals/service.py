@@ -4,9 +4,9 @@ import speech_recognition as sr
 
 class VocalService(object):
     def __init__(self):
-        self.engine = pyttsx3.init()
+        self.engine = pyttsx3.init(driverName="nsss")
         self.engine.setProperty("volume", 1.0)
-        self.engine.setProperty('rate', 170)
+        self.engine.setProperty('rate', 150)
 
         self.microphone = sr.Microphone()
         self.recognizer = sr.Recognizer()
@@ -24,9 +24,6 @@ class VocalService(object):
             print("Fine registrazione")
             return self.recognizer.recognize_google(record, language=f"{self.lang}")
 
-    def isWeatherRequest(self, request: str):
-        return "tempo" in request
-
     def isWikipediaRequest(self, sentence: str):
         return "wikipedia" in sentence or "Wikipedia" in sentence
 
@@ -37,6 +34,12 @@ class VocalService(object):
             return " ".join(tokens[index + 1:])
         except ValueError:
             return None
+
+    def isPositiveSentence(self, sentence: str) -> bool:
+        return "si" in sentence.lower() or "sì" in sentence.lower()
+
+    def isWeatherRequest(self, request: str):
+        return "tempo" in request
 
     def findWeatherCityInRequest(self, request: str) -> str:
         if self.isWeatherRequest(request):

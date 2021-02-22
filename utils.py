@@ -16,6 +16,8 @@ class VocalSentencies(Enum):
     VOCAL_ERROR_NOT_FOUND = "Mi dispiace, ma non ho trovato niente relativo alla tua ricerca."
     VOCAL_CITY_NOT_FOUND = "Per favore, specifica la città"
     VOCAL_GREETING = "Ciao, cosa posso fare per te?"
+    VOCAL_ANOTHER_REQUEST = "Vuoi effettuare una nuova ricerca?"
+    VOCAL_BYE_BYE = "Ciao e a presto!"
 
 
 class NetworkHelper(object):
