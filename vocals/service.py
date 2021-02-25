@@ -4,12 +4,15 @@ import speech_recognition as sr
 
 class VocalService(object):
     def __init__(self):
-        # ---- Configurazione del modulo pyttsx3 ----
+        """
+        Inizializza i moduli per fare lo speech e l'ascolto
+        """
+        # ---- Configurazione del modulo pyttsx3 ---- #
         self.engine = pyttsx3.init(driverName="nsss")
         self.engine.setProperty("volume", 1.0)
         self.engine.setProperty('rate', 150)
 
-        # ---- Configurazione del modulo SpeechRecognition ----
+        # ---- Configurazione del modulo SpeechRecognition ---- #
         self.microphone = sr.Microphone()
         self.recognizer = sr.Recognizer()
         self.lang = "it_IT"

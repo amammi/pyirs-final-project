@@ -1,9 +1,4 @@
-import gtts
-import time
-import audioplayer
-import speech_recognition
-
-from utils import Commons, VocalSentencies
+from utils import VocalSentencies
 from vocals.service import VocalService
 # from weather.service import WeatherService
 from wiki.service import WikipediaService
