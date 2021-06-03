@@ -1,7 +1,11 @@
 from utils import VocalSentencies
 from vocals.service import VocalService
-# from weather.service import WeatherService
+from weather.service import WeatherService
 from wiki.service import WikipediaService
+
+wikiService = WikipediaService()
+weatherService = WeatherService()
+vocalService = VocalService()
 
 
 def main():
@@ -20,14 +24,14 @@ def main():
                     vocalService.saySomething(VocalSentencies.VOCAL_ERROR_NOT_FOUND.value)
             else:
                 vocalService.saySomething(VocalSentencies.VOCAL_ERROR_MESSAGE.value)
-        # elif vocalService.isWeatherRequest(request):
-        #     city = vocalService.findWeatherCityInRequest(request)
-        #     if city is None:
-        #         vocalService.saySomething(VocalSentencies.VOCAL_CITY_NOT_FOUND.value)
-        #         return
-        #     temperature = weatherService.getWeatherCity(city)
-        #     weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
-        #     vocalService.saySomething(weatherPhrase)
+        elif vocalService.isWeatherRequest(request):
+            city = vocalService.findWeatherCityInRequest(request)
+            if city is None:
+                vocalService.saySomething(VocalSentencies.VOCAL_CITY_NOT_FOUND.value)
+                return
+            temperature = weatherService.getWeatherCity(city)
+            weatherPhrase = weatherService.getWeatherPhrase(city, temperature)
+            vocalService.saySomething(weatherPhrase)
         else:
             vocalService.saySomething(VocalSentencies.VOCAL_ERROR_MESSAGE.value)
         vocalService.saySomething(VocalSentencies.VOCAL_ANOTHER_REQUEST.value)
@@ -35,10 +39,6 @@ def main():
         listening = vocalService.isPositiveSentence(response)
     vocalService.saySomething(VocalSentencies.VOCAL_BYE_BYE.value)
 
-
-# weatherService = WeatherService()
-wikiService = WikipediaService()
-vocalService = VocalService()
 
 if __name__ == '__main__':
     main()

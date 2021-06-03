@@ -10,7 +10,7 @@ class VocalService(object):
         # ---- Configurazione del modulo pyttsx3 ---- #
         self.engine = pyttsx3.init(driverName="nsss")
         self.engine.setProperty("volume", 1.0)
-        self.engine.setProperty('rate', 150)
+        self.engine.setProperty('rate', 160)
 
         # ---- Configurazione del modulo SpeechRecognition ---- #
         self.microphone = sr.Microphone()
@@ -43,9 +43,9 @@ class VocalService(object):
         """
         Metodo utile per capire se dalla frase detta, vogliamo cercare o meno su Wikipedia
         :param sentence: la frase trascritta
-        :return: True se Wikipedia è all'interno della frase detta oppure False
+        :return: True se 'Wikipedia' è all'interno della frase detta oppure False
         """
-        return "wikipedia" in sentence or "Wikipedia" in sentence
+        return "wikipedia" in sentence.lower()
 
     def findWikiSentenceInRequest(self, sentence: str) -> str:
         """

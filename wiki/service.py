@@ -8,7 +8,7 @@ class WikipediaService:
 
     def getNaiveSummary(self, request: str):
         try:
-            result = wikipedia.summary(request, sentences=2)
+            result = wikipedia.summary(request, sentences=1)
             return result
         except wikipedia.DisambiguationError:
             return None
